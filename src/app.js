@@ -12,10 +12,30 @@ const server = app.listen(4000, function(){
 // });
 
 // jsonが返ってくるapi
-app.get("/api/json", (req, res, next) => {
-    res.json({
-        db1: "mysql",
-        db2: "postgres",
-        db3: "oracle"
-    })
+// app.get("/api/json", (req, res, next) => {
+//     res.json({
+//         db1: "mysql",
+//         db2: "postgres",
+//         db3: "oracle"
+//     })
+// });
+
+// getのapi
+app.get("/api/hello", (req, res, next) => {
+    res.send("get!");
+});
+
+// postのapi
+app.post("/api/hello", (req, res, next) => {
+    res.send("post!");
+});
+
+// putのapi
+app.put("/api/hello", (req, res, next) => {
+    res.send("put!");
+});
+
+// deleteのapi
+app.delete("/api/hello", (req, res, next) => {
+    res.send("delete!");
 });
