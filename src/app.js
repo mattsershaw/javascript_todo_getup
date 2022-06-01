@@ -1,41 +1,26 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
+const mysql2 = require('mysql2');
 
-// port 4000でサーバ立ち上げ
+// port4000でサーバ立ち上げ
 const server = app.listen(4000, function(){
     console.log("Node.js is listening to PORT:" + server.address().port);
 });
 
-// Hello World!が返ってくるgetのapi
-// app.get("/api/hello", (req, res, next) => {
-//     res.send("Hello World!");
-// });
+app.disable('x-powered-by');
+app.use(cors()).use(express.json());
 
-// jsonが返ってくるapi
-// app.get("/api/json", (req, res, next) => {
-//     res.json({
-//         db1: "mysql",
-//         db2: "postgres",
-//         db3: "oracle"
-//     })
-// });
-
-// getのapi
-app.get("/api/hello", (req, res, next) => {
-    res.send("get!");
+// mysqlに接続
+const connection = mysql2.createConnection({
+    host: 'localhost',
+    port: 3306,
+    user: 'user',
+    password: 'password',
+    database: 'sample_database',
 });
 
-// postのapi
-app.post("/api/hello", (req, res, next) => {
-    res.send("post!");
-});
-
-// putのapi
-app.put("/api/hello", (req, res, next) => {
-    res.send("put!");
-});
-
-// deleteのapi
-app.delete("/api/hello", (req, res, next) => {
-    res.send("delete!");
+connection.connect((err) => {
+    if (err) throw err;
+    console.log('connected mysql');
 });
